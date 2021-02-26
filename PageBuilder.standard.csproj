@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<!-- <TargetFrameworks>netstandard2.0;net471;</TargetFrameworks> -->
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Authors>Janos Erdelyi</Authors>
+		<Product>PageBuilder</Product>
+		<Description>Build a node tree from a well-formed HTML document and output as addresssable HTML with replacement and injection</Description>
+		<AssemblyName>PageBuilder</AssemblyName>
+		<RootNamespace>PageBuilder</RootNamespace>
+		<Version>1.2.0</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
+	</ItemGroup>
+</Project>
