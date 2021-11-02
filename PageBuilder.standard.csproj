@@ -7,7 +7,7 @@
 		<Description>Build a node tree from a well-formed HTML document and output as addresssable HTML with replacement and injection</Description>
 		<AssemblyName>PageBuilder</AssemblyName>
 		<RootNamespace>PageBuilder</RootNamespace>
-		<Version>1.2.0</Version>
+		<Version>1.3.2</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

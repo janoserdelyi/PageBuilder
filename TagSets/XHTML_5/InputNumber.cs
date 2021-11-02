@@ -11,8 +11,6 @@ namespace com.janoserdelyi.PageBuilder.TagSets.XHTML_5
 			this.type = "number";
 		}
 
-		public string Min { get; set; }
-		public string Max { get; set; }
 		public string List { get; set; }
 
 		public override void Render (
@@ -38,15 +36,19 @@ namespace com.janoserdelyi.PageBuilder.TagSets.XHTML_5
 			}
 
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "accesskey", this.Accesskey);
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "accept", accept);
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "maxlength", maxlength);
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "cols", cols);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "accept", this.Accept);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "minlength", this.Minlength);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "maxlength", this.Maxlength);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "min", this.Min);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "max", this.Max);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "cols", this.Cols);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "rows", this.Rows);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "tabindex", this.Tabindex);
 
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "lang", lang);
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "contenteditable", contentEditable);
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "contextmenu", contextMenu);
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "dir", dir);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "lang", this.Lang);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "contenteditable", this.ContentEditable);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "contextmenu", this.ContextMenu);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "dir", this.Dir);
 
 			// some html5 attributes added on here
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "placeholder", this.Placeholder);

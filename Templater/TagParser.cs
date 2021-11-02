@@ -129,8 +129,13 @@ namespace com.janoserdelyi.PageBuilder.Templater
 				if (childNode.NodeType != System.Xml.XmlNodeType.Element) {
 					//continue;
 				}
+
+				if (childNode.Name == "option") {
+					Console.WriteLine ("foo");
+				}
+
 				if (childNode.NodeType == System.Xml.XmlNodeType.Element) {
-					IController childControl = translateNode (childNode, tagFamily);
+					IController childControl = translateNode (childNode, tagFamily, parentController: control);
 					// TODO: take a look at these locks again
 					//lock (control.Controls.SyncRoot) {
 					control.AddChild (childControl);
@@ -142,7 +147,8 @@ namespace com.janoserdelyi.PageBuilder.Templater
 
 		private IController translateNode (
 			XmlNode node,
-			TagFamily tagFamily
+			TagFamily tagFamily,
+			IController parentController = null
 		) {
 
 			//not all elements have an id, but i need to set one to keep everyone happy
@@ -242,9 +248,13 @@ namespace com.janoserdelyi.PageBuilder.Templater
 						typeName = "com.janoserdelyi.PageBuilder.TagSets.Common.Select";
 						obj = new commonBase.Select ();
 						break;
+					case "datalist":
+						typeName = "com.janoserdelyi.PageBuilder.TagSets.Common.Datalist";
+						obj = new commonBase.Datalist ();
+						break;
 					case "option":
 						typeName = "com.janoserdelyi.PageBuilder.TagSets.Common.Option";
-						obj = new commonBase.Option ();
+						obj = new commonBase.Option (parentController: parentController);
 						break;
 					case "optgroup":
 						typeName = "com.janoserdelyi.PageBuilder.TagSets.Common.Optgroup";
@@ -510,9 +520,13 @@ namespace com.janoserdelyi.PageBuilder.Templater
 						typeName = "com.janoserdelyi.PageBuilder.TagSets.Common.Select";
 						obj = new commonBase.Select ();
 						break;
+					case "datalist":
+						typeName = "com.janoserdelyi.PageBuilder.TagSets.Common.Datalist";
+						obj = new commonBase.Datalist ();
+						break;
 					case "option":
 						typeName = "com.janoserdelyi.PageBuilder.TagSets.Common.Option";
-						obj = new commonBase.Option ();
+						obj = new commonBase.Option (parentController: parentController);
 						break;
 					case "optgroup":
 						typeName = "com.janoserdelyi.PageBuilder.TagSets.Common.Optgroup";
@@ -789,11 +803,6 @@ namespace com.janoserdelyi.PageBuilder.Templater
 			*/
 			if (input.ToLower () == "id") {
 				return "Id";
-			}
-
-			//just one of those things... ;(
-			if (input.ToLower () == "maxlength") {
-				return "MaxLength";
 			}
 
 			return input;
