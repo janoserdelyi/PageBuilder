@@ -18,7 +18,8 @@ namespace com.janoserdelyi.PageBuilder.Templater
 		public static Template Load (
 			string templatePath,
 			string templateName,
-			bool verbose = true
+			bool verbose = true,
+			bool prependDoctype = true
 		) {
 			lock (new object ()) {
 				Template pageTemplate = new Template (
@@ -29,7 +30,7 @@ namespace com.janoserdelyi.PageBuilder.Templater
 
 				//load 'er up!
 				pageTemplate.loadXmlDocument ();
-				pageTemplate.parseXmlDocument ();
+				pageTemplate.parseXmlDocument (prependDoctype);
 
 				pageTemplate.LoadDate = DateTime.Now;
 
@@ -42,21 +43,7 @@ namespace com.janoserdelyi.PageBuilder.Templater
 			string templateName,
 			bool verbose = true
 		) {
-			lock (new object ()) {
-				Template pageTemplate = new Template (
-					templatePath,
-					templateName,
-					verbose
-				);
-
-				//load 'er up!
-				pageTemplate.loadXmlDocument ();
-				pageTemplate.parseXmlDocument (false);
-
-				pageTemplate.LoadDate = DateTime.Now;
-
-				return pageTemplate;
-			}
+			return Load (templatePath, templateName, verbose: verbose, prependDoctype: false);
 		}
 
 		public void AddContextValues (
@@ -65,7 +52,9 @@ namespace com.janoserdelyi.PageBuilder.Templater
 			parser.RootControl.MergeNewContextValues (ctx);
 		}
 
-		public void RenderControls (System.IO.TextWriter output) {
+		public void RenderControls (
+			System.IO.TextWriter output
+		) {
 			if (parser != null) {
 				foreach (IController child in parser.RootControl.GetChildren ()) {
 					child.Render (output, 0);
@@ -118,7 +107,7 @@ namespace com.janoserdelyi.PageBuilder.Templater
 			bool prependDoctype
 		) {
 			if (template == null) {
-				throw new System.NullReferenceException ("np template found to parse");
+				throw new System.NullReferenceException ("no template found to parse");
 			}
 
 			parser = new TagParser () {

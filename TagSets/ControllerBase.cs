@@ -26,6 +26,7 @@ namespace com.janoserdelyi.PageBuilder
 
 		// unforunately i think AddClass and RemoveClass are practically usesless since they happen at too late a stage when used for real
 		// may have to make a syntax for injecting into localcontext
+		[Obsolete ("don't use this")]
 		public void AddClass (
 			string className
 		) {
@@ -42,6 +43,7 @@ namespace com.janoserdelyi.PageBuilder
 			}
 		}
 
+		[Obsolete ("don't use this")]
 		public void RemoveClass (
 			string className
 		) {
@@ -85,6 +87,12 @@ namespace com.janoserdelyi.PageBuilder
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "class", this.Class);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "style", this.Style);
 
+			prepareMouseEvents (sb, this.Id);
+			prepareKeyEvents (sb, this.Id);
+			prepareTextEvents (sb, this.Id);
+			prepareFocusEvents (sb, this.Id);
+			prepareAlternateEvents (sb, this.Id);
+			/*
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "onclick", this.Onclick);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "ondblclick", this.Ondblclick);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "onmouseover", this.Onmouseover);
@@ -103,11 +111,13 @@ namespace com.janoserdelyi.PageBuilder
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "onblur", this.Onblur);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "onfocus", this.Onfocus);
 
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "onerror", this.Onerror);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "oninvalid", this.Oninvalid);
+			*/
+
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "disabled", this.Disabled);
 
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "hidden", this.Hidden);
-
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "onerror", this.Onerror);
 
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "draggable", this.Draggable);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "dropzone", this.Dropzone);
@@ -115,8 +125,6 @@ namespace com.janoserdelyi.PageBuilder
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "itemscope", this.Itemscope);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "itemprop", this.Itemprop);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "itemtype", this.Itemtype);
-
-			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "oninvalid", this.Oninvalid);
 
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Id, "role", this.Role);
 
@@ -251,6 +259,7 @@ namespace com.janoserdelyi.PageBuilder
 			string nameOrId
 		) {
 			ControlUtils.RenderAttribute (ContextValues, sb, nameOrId, "onerror", this.Onerror);
+			ControlUtils.RenderAttribute (ContextValues, sb, nameOrId, "oninvalid", this.Oninvalid);
 		}
 
 		protected string prepareOther (string nameOrId) {
