@@ -11,8 +11,6 @@ namespace com.janoserdelyi.PageBuilder.TagSets.XHTML_5
 			this.type = "number";
 		}
 
-		public string List { get; set; }
-
 		public override void Render (
 			System.IO.TextWriter output,
 			int depth = 0

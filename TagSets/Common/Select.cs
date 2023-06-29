@@ -39,6 +39,7 @@ namespace com.janoserdelyi.PageBuilder.TagSets.Common
 		public string Multiple { get; set; }
 		// How many available options should be displayed when this element is rendered?
 		public string Size { get; set; }
+		public string Autocomplete { get; set; }
 
 		public bool isMatched (
 			string matchValue
@@ -82,6 +83,7 @@ namespace com.janoserdelyi.PageBuilder.TagSets.Common
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "required", this.Required);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "readonly", this.Readonly);
 			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "hidden", this.Hidden);
+			ControlUtils.RenderAttribute (ContextValues, sb, this.Name, "autocomplete", this.Autocomplete);
 
 			sb.Append (prepareEventHandlers (this.Name));
 			sb.Append (prepareStyles (this.Name));
